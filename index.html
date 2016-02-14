@@ -41,11 +41,18 @@
  
 		<div id="info">
 			<h1>LARESI ROBOT CONTROL</h1>
+			<button onclick="command_it()">Listen</button>
 			<span id="result"></span>
 		</div>
-
-		<script src="virtualjoystick.js"></script>
-		<script src="control.js"></script>
+		<script type="text/javascript" src="apiAi/resampler.js"></script>
+		<script type="text/javascript" src="apiAi/recorderWorker.js"></script>
+		<script type="text/javascript" src="apiAi/recorder.js"></script>
+		<script type="text/javascript" src="apiAi/processors.js"></script>
+		<script type="text/javascript" src="apiAi/vad.js"></script>
+		<script type="text/javascript" src="apiAi/tts.js"></script>
+		<script type="text/javascript" src="apiAi/api.ai.js"></script>
+		<script type="text/javascript" src="virtualjoystick.js"></script>
+		<script type="text/javascript" src="control.js"></script>
 		<script>
 			console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
 	
@@ -61,11 +68,9 @@
 			})
 
 			setInterval(function(){
-			    if(joystick.deltaY()==0 && joystick.deltaX()==0){
-			        stop();
-			    }
+	
 			    var rad = Math.atan2(joystick.deltaY(), joystick.deltaX());
-			    move(-joystick.deltaY()/1000,-joystick.deltaX()/1000);
+			    move(-joystick.deltaY()/100,-joystick.deltaX()/100);
 				var outputEl	= document.getElementById('result');
 				outputEl.innerHTML	= '<b>Result:</b> '
 					+ ' dx:'+joystick.deltaX()
